@@ -16,5 +16,8 @@ jobs:
 
       - name: Deploy Application
         run: |
-          cd $GITHUB_WORKSPACE  # ✅ Automatically set by GitHub Actions
-          git pull origin main  # ✅ Ensures latest code is pulled
+          sudo mkdir -p /home/ubuntu/app  # Ensure directory exists
+          sudo cp -r $GITHUB_WORKSPACE/* /home/ubuntu/app/  # Copy contents, not the folder itself
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/app  # Ensure correct permissions
+
+          cd /home/ubuntu/app  # Change directory to the deployed code
