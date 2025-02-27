@@ -4,20 +4,22 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # Allows manual trigger
+  workflow_dispatch:
 
 jobs:
   deploy:
-    runs-on: self-hosted  # ✅ Ensure this is set
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          path: /home/ubuntu # Ensures the code is checked out here
 
       - name: Deploy Application
         run: |
           cd /home/ubuntu
-          git pull origin main
-          
+
+
 
 
