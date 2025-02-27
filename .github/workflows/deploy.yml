@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   deploy:
-    runs-on: self-hosted  # Uses the self-hosted runner
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Code
@@ -17,3 +18,4 @@ jobs:
         run: |
           cd /home/ubuntu/app
           git pull origin main
+
