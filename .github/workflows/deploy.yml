@@ -16,7 +16,7 @@ jobs:
 
       - name: Deploy Application
         run: |
-          cd /home/ubuntu/app
+          cd /home/ubuntu
           git pull origin main
           
 
