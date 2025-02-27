@@ -13,13 +13,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          path: /home/ubuntu # Ensures the code is checked out here
 
       - name: Deploy Application
         run: |
-          cd /home/ubuntu
-
-
-
-
+          cd $GITHUB_WORKSPACE  # ✅ Automatically set by GitHub Actions
+          git pull origin main  # ✅ Ensures latest code is pulled
