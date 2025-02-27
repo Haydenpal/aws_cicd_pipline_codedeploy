@@ -1,0 +1,32 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    environment: production  # This requires approval
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Check Commit Message
+        run: |
+          LAST_COMMIT_MSG=$(git log -1 --pretty=%B)
+          echo "Last commit message: $LAST_COMMIT_MSG"
+          if [[ "$LAST_COMMIT_MSG" == *"[deploy]"* ]]; then
+            echo "Deployment triggered!"
+          else
+            echo "No deployment needed. Exiting."
+            exit 0
+          fi
+
+      - name: Deploy Application
+        if: success()
+        run: |
+          cd /home/ubuntu/app
+          git pull origin main
